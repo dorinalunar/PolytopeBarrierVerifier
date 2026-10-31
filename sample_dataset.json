@@ -1,0 +1,116 @@
+{
+  "dataset_version": "polytope-barrier-verifier-v1",
+  "description": "Reference discrete-time affine transition systems and exact integer Farkas barrier certificates for PolytopeBarrierVerifier.py",
+  "samples": [
+    {
+      "id": "bounded_1d_counter",
+      "nonce": "counter_loop_1d_v1",
+      "description": "1D monotonic counter starting at x = 0, incrementing by 1 while x <= 9, proving safety bound x <= 10.",
+      "system": {
+        "dimension": 1,
+        "initial": [
+          { "a": [1], "b": 0 },
+          { "a": [-1], "b": 0 }
+        ],
+        "guard": [
+          { "a": [1], "b": 9 }
+        ],
+        "matrix": [[1]],
+        "offset": [1],
+        "safety": [
+          { "a": [1], "b": 10 }
+        ],
+        "seed": [0]
+      },
+      "valid_certificate": {
+        "invariant": [
+          { "a": [1], "b": 10 }
+        ],
+        "initial": [
+          { "weights": [1, 0], "scale": 1 }
+        ],
+        "step": [
+          { "weights": [0, 1], "scale": 1 }
+        ],
+        "safety": [
+          { "weights": [1], "scale": 1 }
+        ]
+      }
+    },
+    {
+      "id": "coupled_2d_accumulator",
+      "nonce": "coupled_accum_2d_v1",
+      "description": "2D synchronized state transition (x_next, y_next) = (x + 1, y + 1) guarded by x + y <= 8, proving safety halfspace x + y <= 10.",
+      "system": {
+        "dimension": 2,
+        "initial": [
+          { "a": [1, 0], "b": 0 },
+          { "a": [0, 1], "b": 0 },
+          { "a": [-1, 0], "b": 0 },
+          { "a": [0, -1], "b": 0 }
+        ],
+        "guard": [
+          { "a": [1, 1], "b": 8 }
+        ],
+        "matrix": [
+          [1, 0],
+          [0, 1]
+        ],
+        "offset": [1, 1],
+        "safety": [
+          { "a": [1, 1], "b": 10 }
+        ],
+        "seed": [0, 0]
+      },
+      "valid_certificate": {
+        "invariant": [
+          { "a": [1, 1], "b": 10 }
+        ],
+        "initial": [
+          { "weights": [1, 1, 0, 0], "scale": 1 }
+        ],
+        "step": [
+          { "weights": [0, 1], "scale": 1 }
+        ],
+        "safety": [
+          { "weights": [1], "scale": 1 }
+        ]
+      }
+    },
+    {
+      "id": "damped_1d_buffer",
+      "nonce": "damped_buffer_1d_v1",
+      "description": "1D buffer starting at x = 2, guarded by x <= 15, stepping x_next = x + 3, proving safety bound x <= 18.",
+      "system": {
+        "dimension": 1,
+        "initial": [
+          { "a": [1], "b": 2 },
+          { "a": [-1], "b": -2 }
+        ],
+        "guard": [
+          { "a": [1], "b": 15 }
+        ],
+        "matrix": [[1]],
+        "offset": [3],
+        "safety": [
+          { "a": [1], "b": 18 }
+        ],
+        "seed": [2]
+      },
+      "valid_certificate": {
+        "invariant": [
+          { "a": [1], "b": 18 }
+        ],
+        "initial": [
+          { "weights": [1, 0], "scale": 1 }
+        ],
+        "step": [
+          { "weights": [0, 1], "scale": 1 }
+        ],
+        "safety": [
+          { "weights": [1], "scale": 1 }
+        ]
+      }
+    }
+  ]
+}
