@@ -18,18 +18,13 @@
 
 ---
 
-## Mathematical Model
+## Repository Structure
 
-Given a state dimension $d \in \{1, 2\}$, an affine transition system consists of:
-* **Initial Polytope ($I$):** $A_{\text{init}} x \le b_{\text{init}}$, witnessed as non-empty by an integer `seed` $x_0 \in I$.
-* **Transition Guard ($G$):** $A_{\text{guard}} x \le b_{\text{guard}}$.
-* **Affine Update Map:** $x_{\text{next}} = M x + c$, where $M \in \mathbb{Z}^{d \times d}$ (`matrix`) and $c \in \mathbb{Z}^d$ (`offset`).
-* **Safety Polytope ($S$):** $A_{\text{safe}} x \le b_{\text{safe}}$.
-
-A candidate barrier certificate $B = \{x \mid A_{\text{inv}} x \le b_{\text{inv}}\}$ is accepted on-chain if and only if dual integer witnesses $(\lambda \ge 0, s \ge 1)$ prove:
-1. **Initiation:** $I \subseteq B$
-2. **Inductive Consecution:** $(B \cap G) \implies \{x \mid A_{\text{inv}}(M x + c) \le b_{\text{inv}}\}$
-3. **Safety Entailment:** $B \subseteq S$
+* `PolytopeBarrierVerifier.py` — GenLayer Intelligent Contract implementation.
+* `sample_dataset.json` — Reference 1D and 2D affine transition systems and verified Farkas barrier certificates.
+* `test_polytope_barrier.py` — End-to-end `pytest` unit test suite with local GenVM mock and dataset verification.
+* `SECURITY.md` — Formal soundness and input validation policy.
+* `CONTRIBUTING.md` — Developer guidelines.
 
 ---
 
@@ -55,7 +50,7 @@ A candidate barrier certificate $B = \{x \mid A_{\text{inv}} x \le b_{\text{inv}
 Install dependencies and run the deterministic `pytest` suite:
 
     pip install -r requirements.txt
-    pytest test.py -v
+    pytest test_polytope_barrier.py -v
 
 ---
 
